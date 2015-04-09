@@ -39,6 +39,12 @@ class main_controller implements main_interface
 	
 	public function index()
 	{
+		if($this->config['clausi_wowroster_active'] == 0) 
+		{
+			$this->template->assign_var('WOWROSTER_MESSAGE', $this->user->lang['WOWROSTER_INACTIVE']);
+			return $this->helper->render('wowroster_error.html', $this->user->lang['WOWROSTER_PAGE'], 404);
+		}
+		
 		return $this->helper->render('wowroster_index.html', $this->user->lang['WOWROSTER_PAGE']);
 	}
 	

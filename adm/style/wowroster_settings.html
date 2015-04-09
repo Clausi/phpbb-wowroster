@@ -1,0 +1,57 @@
+<!-- INCLUDE overall_header.html -->
+
+<h1>{L_SETTINGS}</h1>
+
+<form id="acp_board" method="post" action="{U_ACTION}">
+	<fieldset>
+		<dl>
+			<dt>
+				<label for="clausi_wowroster_active">{L_ACP_WOWROSTER_ACTIVE}</label>
+			</dt>
+			<dd>
+				<input type="radio" class="radio" name="clausi_wowroster_active" value="1" <!-- IF CLAUSI_WOWROSTER_ACTIVE -->checked="checked"<!-- ENDIF -->/> {L_YES} &nbsp;
+				<input type="radio" class="radio" name="clausi_wowroster_active" value="0" <!-- IF not CLAUSI_WOWROSTER_ACTIVE -->checked="checked"<!-- ENDIF --> /> {L_NO}
+			</dd>
+		</dl>
+		
+		<dl>
+			<dt>
+				<label for="clausi_wowroster_cron_active">{L_ACP_WOWROSTER_CRON_ACTIVE}</label>
+				<br />
+				<span>{L_ACP_WOWROSTER_CRON_EXPLAIN}</span>
+			</dt>
+			<dd>
+				<input type="radio" class="radio" name="clausi_wowroster_cron_active" value="1" <!-- IF CLAUSI_WOWROSTER_CRON_ACTIVE -->checked="checked"<!-- ENDIF -->/> {L_YES} &nbsp;
+				<input type="radio" class="radio" name="clausi_wowroster_cron_active" value="0" <!-- IF not CLAUSI_WOWROSTER_CRON_ACTIVE -->checked="checked"<!-- ENDIF --> /> {L_NO}
+			</dd>
+		</dl>
+		
+		<p>
+			{L_ACP_WOWROSTER_CRON_MANUAL}: <a href="http://yourforum.url/roster/cron/{CLAUSI_WOWROSTER_CRON_KEY}">http://yourforum.url/roster/cron/{CLAUSI_WOWROSTER_CRON_KEY}</a>
+		</p>
+		
+		<dl>
+			<dt>
+				<label for="clausi_wowroster_cron_interval">{L_ACP_WOWROSTER_CRON_INTERVAL}</label>
+				<br />
+				<span>{L_ACP_WOWROSTER_CRON_INTERVAL_EXPLAIN}</span>
+			</dt>
+			<dd>
+				<input type="text" name="clausi_wowroster_cron_interval" value="{CLAUSI_WOWROSTER_CRON_INTERVAL}" /> {L_MINUTES}
+			</dd>
+		</dl>
+
+		<p class="submit-buttons">
+			<input class="button1" type="submit" id="submit" name="submit" value="{L_SUBMIT}" />&nbsp;
+			<input class="button2" type="reset" id="reset" name="reset" value="{L_RESET}" />
+		</p>
+
+		{S_FORM_TOKEN}
+	</fieldset>
+</form>
+
+<p>
+	{L_ACP_WOWROSTER_CONFIG_EXPLAIN}
+</p>
+
+<!-- INCLUDE overall_footer.html -->

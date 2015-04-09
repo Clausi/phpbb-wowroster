@@ -1,0 +1,36 @@
+{
+	"name": "clausi/wowroster",
+	"type": "phpbb-extension",
+	"description": "World of Warcraft guild roster for phpBB.",
+	"homepage": "https://github.com/Clausi/phpbb-wowroster",
+	"version": "1.0.0",
+	"time": "2015-04-09",
+	"keywords": ["phpbb", "extension", "wow", "guild", "roster"],
+	"license": "GPL-2.0",
+	"authors": [
+		{
+			"name": "Clausi",
+			"homepage": "https://github.com/Clausi",
+			"email": "support@cklausi.de",
+			"role": "Developer"
+		}
+	],
+	"require": {
+		"php": ">=5.3.3",
+                "composer/installers": "~1.0"
+	},
+	"require-dev": {
+		"phpbb/epv": "dev-master"
+	},
+	"extra": {
+		"display-name": "WoW Roster",
+		"soft-require": {
+			"phpbb/phpbb": "3.1.*"
+		},
+		"version-check": {
+			"host": "version.cklausi.de",
+			"directory": "/version",
+			"filename": "phpbb-wowroster.json"
+		}
+	}
+}

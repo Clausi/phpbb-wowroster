@@ -1,0 +1,35 @@
+imports:
+    - { resource: tables.yml }
+
+services:
+    clausi.wowroster.main.controller:
+        class: clausi\wowroster\controller\main_controller
+        arguments:
+            - @config
+            - @auth
+            - @controller.helper
+            - @dbal.conn
+            - @template
+            - @user
+            - @request
+            - @service_container
+    clausi.wowroster.listener:
+        class: clausi\wowroster\event\main_listener
+        arguments:
+            - @controller.helper
+            - @template
+            - @config
+            - @auth
+        tags:
+            - { name: event.listener }
+    clausi.wowroster.admin.controller:
+        class: clausi\wowroster\controller\admin_controller
+        arguments:
+            - @config
+            - @dbal.conn
+            - @request
+            - @template
+            - @user
+            - @auth
+            - @service_container
+            - @clausi.wowroster.main.controller

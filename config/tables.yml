@@ -1,0 +1,2 @@
+parameters:
+    tables.clausi.wowroster: %core.table_prefix%wowroster

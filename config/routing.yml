@@ -1,0 +1,7 @@
+clausi_wowroster_controller:
+    path: /roster/index
+    defaults: { _controller: clausi.wowroster.main.controller:index }
+
+clausi_wowroster_controller_cron:
+    path: /roster/cron/{key}
+    defaults: { _controller: clausi.wowroster.main.controller:cron, key: ''}

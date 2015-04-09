@@ -32,4 +32,5 @@ services:
             - @user
             - @auth
             - @service_container
+            - @controller.helper
             - @clausi.wowroster.main.controller

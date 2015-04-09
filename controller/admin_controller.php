@@ -13,13 +13,14 @@ class admin_controller implements admin_interface
 	protected $user;
 	protected $container;
 	protected $auth;
+	protected $helper;
 	
 	protected $wowroster;
 	
 	protected $wowrosterTable;
 
 
-	public function __construct(\phpbb\config\config $config, \phpbb\db\driver\driver_interface $db, \phpbb\request\request $request, \phpbb\template\template $template, \phpbb\user $user, \phpbb\auth\auth $auth, ContainerInterface $container, \clausi\wowroster\controller\main_controller $wowroster)
+	public function __construct(\phpbb\config\config $config, \phpbb\db\driver\driver_interface $db, \phpbb\request\request $request, \phpbb\template\template $template, \phpbb\user $user, \phpbb\auth\auth $auth, ContainerInterface $container, \phpbb\controller\helper $helper, \clausi\wowroster\controller\main_controller $wowroster)
 	{
 		$this->config = $config;
 		$this->db = $db;
@@ -28,6 +29,7 @@ class admin_controller implements admin_interface
 		$this->user = $user;
 		$this->auth = $auth;
 		$this->container = $container;
+		$this->helper = $helper;
 		
 		$this->wowroster = $wowroster;
 		
@@ -36,6 +38,8 @@ class admin_controller implements admin_interface
 	
 	public function display_options()
 	{
+		global $phpbb_root_path, $phpEx;
+		
 		add_form_key('clausi/wowroster');
 
 		if ($this->request->is_set_post('submit'))
@@ -49,12 +53,13 @@ class admin_controller implements admin_interface
 			trigger_error($this->user->lang('ACP_WOWROSTER_SETTING_SAVED') . adm_back_link($this->u_action));
 		}
 		
+		$u_cron = $this->helper->route('clausi_wowroster_controller_cron', array('key' => $this->config['clausi_wowroster_cron_key']));
 
 		$this->template->assign_vars(array(
 			'U_ACTION'	=> $this->u_action,
+			'U_WOWROSTER_CRON' => substr($u_cron, 0, strpos($u_cron, "?")),
 			'CLAUSI_WOWROSTER_ACTIVE' => $this->config['clausi_wowroster_active'],
 			'CLAUSI_WOWROSTER_CRON_ACTIVE' => $this->config['clausi_wowroster_cron_active'],
-			'CLAUSI_WOWROSTER_CRON_KEY' => $this->config['clausi_wowroster_cron_key'],
 			'CLAUSI_WOWROSTER_CRON_INTERVAL' => $this->config['clausi_wowroster_cron_interval'],
 		));
 	}

@@ -51,7 +51,13 @@ class main_controller implements main_interface
 	
 	public function cron($key = '')
 	{
-		return $this->helper->render('wowroster_index.html', $this->user->lang['WOWROSTER_PAGE']);
+		if($key !== $this->config['clausi_wowroster_cron_key']) 
+		{
+			$this->template->assign_var('WOWROSTER_MESSAGE', $this->user->lang['WOWROSTER_ACCESS']);
+			return $this->helper->render('wowroster_error.html', $this->user->lang['WOWROSTER_PAGE'], 403);
+		}
+		
+		return $this->helper->render('wowroster_cron.html', $this->user->lang['WOWROSTER_PAGE']);
 	}
 	
 	

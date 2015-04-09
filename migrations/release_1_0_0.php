@@ -73,6 +73,17 @@ class release_1_0_0 extends \phpbb\db\migration\migration
 						'roster_uk' => array('UNIQUE', 'uniquekey'),
 					),
 				),
+				
+				$this->table_prefix . 'wowguild' => array(
+					'COLUMNS' => array(
+						'name' => array('VCHAR', NULL),
+						'value' => array('MTEXT', NULL),
+					),
+					'PRIMARY_KEY'	=> 'name',
+					'KEYS'=> array(
+						'guild_key' => array('UNIQUE', 'name'),
+					),
+				),
 
 			),
 
@@ -85,6 +96,7 @@ class release_1_0_0 extends \phpbb\db\migration\migration
 		return array(
 			'drop_tables' => array(
 				$this->table_prefix . 'wowroster',
+				$this->table_prefix . 'wowguild',
 			),
 		);
 	}

@@ -60,7 +60,7 @@ class admin_controller implements admin_interface
 			'U_WOWROSTER_CRON' => substr($u_cron, 0, strpos($u_cron, "?")),
 			'CLAUSI_WOWROSTER_ACTIVE' => $this->config['clausi_wowroster_active'],
 			'CLAUSI_WOWROSTER_CRON_ACTIVE' => $this->config['clausi_wowroster_cron_active'],
-			'CLAUSI_WOWROSTER_CRON_INTERVAL' => $this->config['clausi_wowroster_cron_interval'],
+			'CLAUSI_WOWROSTER_GC' => $this->config['clausi_wowroster_gc'] / 60,
 		));
 	}
 
@@ -69,7 +69,7 @@ class admin_controller implements admin_interface
 	{
 		$this->config->set('clausi_wowroster_active', $this->request->variable('clausi_wowroster_active', 0));
 		$this->config->set('clausi_wowroster_cron_active', $this->request->variable('clausi_wowroster_cron_active', 0));
-		$this->config->set('clausi_wowroster_cron_interval', $this->request->variable('clausi_wowroster_cron_interval', ''));
+		$this->config->set('clausi_wowroster_gc', $this->request->variable('clausi_wowroster_gc', '') * 60);
 	}
 
 	

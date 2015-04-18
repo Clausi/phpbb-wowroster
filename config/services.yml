@@ -34,3 +34,14 @@ services:
             - @service_container
             - @controller.helper
             - @clausi.wowroster.main.controller
+    cron.task.core.clausi_wowroster:
+        class: clausi\wowroster\cron\task\core\clausi_wowroster
+        arguments:
+            - @config
+            - @dbal.conn
+            - @service_container
+            - @clausi.wowroster.main.controller
+        calls:
+            - [set_name, [cron.task.core.clausi_wowroster]]
+        tags:
+            - { name: cron.task }

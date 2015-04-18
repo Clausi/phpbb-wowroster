@@ -4,7 +4,7 @@ namespace clausi\wowroster\cron\task\core;
 
 use Symfony\Component\DependencyInjection\ContainerInterface;
 
-class wowroster_cron extends \phpbb\cron\task\base
+class clausi_wowroster extends \phpbb\cron\task\base
 {
 	protected $config;
 	protected $db;
@@ -33,13 +33,8 @@ class wowroster_cron extends \phpbb\cron\task\base
 	{
 		// echo "run";
 		$this->getRoster();
-	}
-	
-	
-	private function getRoster()
-	{
 		
-		$this->config->set('clausi_wowroster_cron_lastrun', time());
+		$this->config->set('clausi_wowroster_last_gc', time());
 	}
 
 	
@@ -50,7 +45,7 @@ class wowroster_cron extends \phpbb\cron\task\base
 	*/
 	public function is_runnable()
 	{
-		if( $this->config['clausi_wowroster_cron_active'] && $this->config['clausi_wowroster_bnetkey'] != '' ) return true;
+		if( $this->config['clausi_wowroster_cron_active'] ) return true;
 		
 		return false;
 	}
@@ -63,6 +58,14 @@ class wowroster_cron extends \phpbb\cron\task\base
 	*/
 	public function should_run()
 	{
-		return $this->config['clausi_wowroster_cron_lastrun'] < time() - ($this->config['clausi_wowroster_cron_interval'] * 60);
+		return $this->config['clausi_wowroster_last_gc'] < time() - ($this->config['clausi_wowroster_gc'] * 60);
 	}
+	
+	
+	// Pull roster from battle.net api
+	private function getRoster()
+	{
+		$this->config->set('clausi_wowroster_last_gc', time());
+	}
+	
 }

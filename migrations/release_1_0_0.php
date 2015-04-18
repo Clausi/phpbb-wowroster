@@ -14,8 +14,8 @@ class release_1_0_0 extends \phpbb\db\migration\migration
 		return array(
 			array('config.add', array('clausi_wowroster_active', 0)),
 			array('config.add', array('clausi_wowroster_cron_active', 1)),
-			array('config.add', array('clausi_wowroster_cron_lastrun', 0, true)),
-			array('config.add', array('clausi_wowroster_cron_interval', 720)),
+			array('config.add', array('clausi_wowroster_last_gc', 0, true)),
+			array('config.add', array('clausi_wowroster_gc', 43200)),
 			// External cron trigger key
 			array('config.add', array('clausi_wowroster_cron_key', substr(md5(microtime()),rand(0,26),5))),
 

@@ -41,6 +41,8 @@ services:
             - @dbal.conn
             - @service_container
             - @clausi.wowroster.main.controller
+            - %core.root_path%
+            - %core.php_ext%
         calls:
             - [set_name, [cron.task.core.clausi_wowroster]]
         tags:

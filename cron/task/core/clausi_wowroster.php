@@ -32,13 +32,9 @@ class clausi_wowroster extends \phpbb\cron\task\base
 		include_once($this->phpbb_root_path . 'ext/clausi/wowroster/wowarmoryapi_config.'.$this->php_ext);
 		$this->armory = new \BattlenetArmory('EU', 'Anetheron');
 		$this->armory->UTF8(true);
-		$this->armory->setGuildsCacheTTL(1); // ensure guild cache is below cron interval but only once a second calls are possible
-		
-		// get guild, TODO: use config
+		$this->armory->setGuildsCacheTTL($this->config['clausi_wowroster_gc'] -1); // ensure guild cache is below cron interval
 		$this->guild = $this->armory->getGuild('Tenebrae');
-		$guildData = $this->guild->getData();
-		$this->var_display($guildData);
-		
+
 		$this->wowrosterTable = $this->container->getParameter('tables.clausi.wowroster');
 	}
 	
@@ -49,7 +45,9 @@ class clausi_wowroster extends \phpbb\cron\task\base
 	*/
 	public function run()
 	{
-		echo "run"; // for testing
+		// echo "run"; // for testing
+		
+		$this->getInfo();
 		$this->getRoster();
 		
 		$this->config->set('clausi_wowroster_last_gc', time());
@@ -77,15 +75,25 @@ class clausi_wowroster extends \phpbb\cron\task\base
 	public function should_run()
 	{
 		return true; // for testing
-		//return $this->config['clausi_wowroster_last_gc'] < time() - ($this->config['clausi_wowroster_gc'] * 60);
+		//return $this->config['clausi_wowroster_last_gc'] < time() - ($this->config['clausi_wowroster_gc']);
 	}
 	
 	
-	// Pull roster from battle.net api
+	// Save roster data from battle.net api
 	private function getRoster()
 	{
-		
+		$members = $this->guild->getMembers('name', 'asc');
+		// $this->var_display($members);
 	}
+	
+	
+	// Save guilddata from battle.net api
+	private function getInfo()
+	{
+		$info = $this->guild->getData();
+		$this->var_display($info);
+	}
+	
 	
 	private function var_display($var)
 	{
